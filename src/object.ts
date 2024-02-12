@@ -3,6 +3,10 @@ type Filter<O extends object, M> = {
     [K in keyof O as O[K] extends M ? never : K]: O[K]
 }
 
+type FilterKeys<O extends object, M> = {
+    [K in keyof O as K extends M ?  never : K]: O[K]
+}
+
 
 // Example usages
  
@@ -32,3 +36,12 @@ type User = {
 };
 */
 type filterString = Filter<User, string>
+
+/*
+Result: 
+
+type User = {
+    email: string
+};
+*/
+type filterKey = FilterKeys<User, 'name' | 'age'>
